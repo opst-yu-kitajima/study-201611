@@ -20,7 +20,7 @@ public class GetTest implements Constant {
 		BufferedWriter output = new BufferedWriter(new PrintWriter(socket.getOutputStream()));
 
 		System.out.println("##### Start input header #####");
-		StringBuilder header = new StringBuilder();
+		StringBuilder header = new StringBuilder(1024);
 		while (true) {
 			String line = input.readLine();
 			if (StringUtils.isEmpty(line)) {
