@@ -33,9 +33,10 @@ public class GetTest implements Constant {
 
 		System.out.println("##### Start ontput header and body #####");
 		output.write(IOUtils.toString(System.in));
-		output.flush();
 		System.out.println("##### End output header and body #####");
 
+		output.close();
+		input.close();
 		socket.close();
 		serverSocket.close();
 	}
