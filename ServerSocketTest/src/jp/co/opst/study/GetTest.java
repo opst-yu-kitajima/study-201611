@@ -1,6 +1,7 @@
 package jp.co.opst.study;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -16,7 +17,7 @@ public class GetTest implements Constant {
 		ServerSocket serverSocket = new ServerSocket(HTTP_PORT);
 		Socket socket = serverSocket.accept();
 		BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
+		BufferedWriter output = new BufferedWriter(new PrintWriter(socket.getOutputStream()));
 
 		System.out.println("##### Start input header #####");
 		StringBuilder header = new StringBuilder();
@@ -31,8 +32,7 @@ public class GetTest implements Constant {
 		System.out.println("##### End input header #####");
 
 		System.out.println("##### Start ontput header and body #####");
-		String outStr = IOUtils.toString(System.in);
-		output.print(outStr);
+		output.write(IOUtils.toString(System.in));
 		output.flush();
 		System.out.println("##### End output header and body #####");
 
