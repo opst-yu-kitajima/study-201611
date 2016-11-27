@@ -1,15 +1,19 @@
 package jp.co.opst.study;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.zip.GZIPOutputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class GetTest implements Constant {
+public class GzipTest implements Constant {
 
 	public static void main(String[] args) throws Exception {
 
@@ -30,9 +34,26 @@ public class GetTest implements Constant {
 		System.out.println(header.toString());
 		System.out.println("##### End input header #####");
 
-		System.out.println("##### Start ontput header and body #####");
+		System.out.println("##### Start gzip load #####");
+		byte[] html = FileUtils.readFileToByteArray(new File("./html/post.html"));
+		ByteArrayOutputStream bout = new ByteArrayOutputStream();
+		GZIPOutputStream gzipOut = new GZIPOutputStream(bout);
+		IOUtils.write(html, gzipOut);
+		gzipOut.finish();
+		byte[] gzipHtml = bout.toByteArray();
+		System.out.println("Gzip byte size: " + gzipHtml.length);
+		System.out.println("##### End zip load #####");
+
+		System.out.println("##### Start ontput header #####");
 		IOUtils.write(IOUtils.toByteArray(System.in), output);
-		System.out.println("##### End output header and body #####");
+		System.out.println("##### End output header #####");
+
+		IOUtils.write("\r\n".getBytes(), output);
+
+		System.out.println("##### Start ontput body #####");
+		System.out.print(new String(gzipHtml, "UTF-8"));
+		IOUtils.write(gzipHtml, output);
+		System.out.println("##### End output body #####");
 
 		output.close();
 		input.close();
