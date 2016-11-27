@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>post</title>
+<script src="https://goo.gl/4wB64q"></script>
+<script>
+$(function() {
+
+	$("button").on("click", function() {
+		var data = $("textarea").val();
+
+		$.ajax("/put/test", {
+			data : data,
+			method : "PUT"
+		}).done(function(json) {
+			$("body").append("<b>OK</b>");
+		});
+	});
+});
+</script>
+</head>
+<body>
+<textarea></textarea>
+<button>送信</button>
+</body>
+</html>
