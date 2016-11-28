@@ -1,13 +1,11 @@
 package jp.co.opst.study;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -33,7 +31,9 @@ public class BinaryTest implements Constant {
 		System.out.println("##### End input header #####");
 
 		System.out.println("##### Start gzip load #####");
-		byte[] image = FileUtils.readFileToByteArray(new File("./html/one_ok_rock.png"));
+
+		// byte配列でone_ok_rock.pngを読み込んでください。
+		byte[] image = null;
 		System.out.println("Gzip byte size: " + image.length);
 		System.out.println("##### End zip load #####");
 
