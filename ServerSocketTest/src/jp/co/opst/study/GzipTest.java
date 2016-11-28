@@ -43,7 +43,7 @@ public class GzipTest implements Constant {
 		IOUtils.write("\r\n".getBytes(), output);
 
 		System.out.println("##### Start ontput body #####");
-		System.out.print(new String(gzipHtml, "UTF-8"));
+		System.out.print(new String(gzipHtml, "US-ASCII"));
 		IOUtils.write(gzipHtml, output);
 		System.out.println("##### End output body #####");
 
